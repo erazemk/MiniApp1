@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Light theme color scheme -->
+    <color name="primary">#3F51B5</color>
+    <color name="primary_light">#757DE8</color>
+    <color name="primary_dark">#002984</color>
+    <color name="primary_text">#FFFFFF</color>
+    <color name="secondary">#B53F51</color>
+    <color name="secondary_light">#EB6F7D</color>
+    <color name="secondary_dark">#800229</color>
+    <color name="secondary_text">#FFFFFF</color>
+
+    <!-- Dark theme color scheme -->
+    <color name="primary_night">#3F51B5</color>
+    <color name="primary_night_light">#757DE8</color>
+    <color name="primary_night_dark">#002984</color>
+    <color name="primary_night_text">#FFFFFF</color>
+    <color name="secondary_night">#B53F51</color>
+    <color name="secondary_night_light">#EB6F7D</color>
+    <color name="secondary_night_dark">#800229</color>
+    <color name="secondary_night_text">#FFFFFF</color>
+</resources>
