@@ -1,3 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name" tools:ignore="Typos">MiniApp1</string>
+    <string name="app_name" tools:ignore="Typos">MiniApp 1</string>
+
+    <!-- Details fragment -->
+    <string name="delete_note_button_text">Delete</string>
+    <string name="share_note_button_text">Share</string>
+
+    <!-- New note fragment -->
+    <string name="take_photo_button_text">Take photo</string>
+    <string name="save_note_button_text">Save note</string>
+    <string name="note_title_hint_text">Add note title</string>
+    <string name="note_contents_hint_text">Add note text</string>
 </resources>
