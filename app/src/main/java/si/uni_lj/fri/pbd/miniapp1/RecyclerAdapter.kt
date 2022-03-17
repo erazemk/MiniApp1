@@ -1,13 +1,15 @@
 package si.uni_lj.fri.pbd.miniapp1
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter(var memos: List<MemoModel>) : RecyclerView.Adapter<RecyclerAdapter.CardViewHolder>() {
+class RecyclerAdapter(var memos: MutableList<MemoModel>) : RecyclerView.Adapter<RecyclerAdapter.CardViewHolder>() {
 
     inner class CardViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         var memoTitle: TextView? = null
@@ -30,6 +32,16 @@ class RecyclerAdapter(var memos: List<MemoModel>) : RecyclerView.Adapter<Recycle
             memoTitle?.text = memos[position].title
             memoTimestamp?.text = memos[position].timestamp
             memoImage?.setImageBitmap(memos[position].image)
+
+            // Switch to details fragment when clicking on item
+            itemView.setOnClickListener {
+                val activity = it.context as? AppCompatActivity
+                activity?.supportFragmentManager?.beginTransaction()?.apply {
+                    Log.d("RecyclerAdapter", "Opening memo ${memos[position].id}")
+                    replace(R.id.fragment_container, DetailsFragment(memos[position].id))
+                    commit()
+                }
+            }
         }
     }
 
