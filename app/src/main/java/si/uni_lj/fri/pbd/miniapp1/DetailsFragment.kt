@@ -1,59 +1,72 @@
 package si.uni_lj.fri.pbd.miniapp1
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import org.json.JSONObject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class DetailsFragment(var memoId: Int) : Fragment(R.layout.fragment_details) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class DetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var memo: MemoModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        with (sharedPref?.edit()) {
+            val memoJson = sharedPref?.getString("$memoId", "")
+            memo = jsonToMemo(JSONObject(memoJson as String))
+            Log.d("DetailsFragment", "Opened memo titled '${memo.title}'")
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_details, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_details, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        Log.d("DetailsFragment", "Memo info inside onCreateView: '${memo.title}', '${memo.timestamp}', '${memo.text}'")
+
+        // Attach to views
+        val memoTitle = view.findViewById<TextView>(R.id.detailsMemoTitle)
+        val memoImage = view.findViewById<ImageView>(R.id.detailsMemoImage)
+        val memoTimestamp = view.findViewById<TextView>(R.id.detailsMemoTimestamp)
+        val memoText = view.findViewById<TextView>(R.id.detailsMemoText)
+        val deleteButton = view.findViewById<Button>(R.id.detailsDeleteButton)
+        val shareButton = view.findViewById<Button>(R.id.detailsShareButton)
+
+        // Set elements
+        memoTitle?.text = memo.title
+        memoImage?.setImageBitmap(memo.image)
+        memoTimestamp?.text = memo.timestamp
+        memoText?.text = memo.text
+
+        deleteButton?.setOnClickListener {
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+            with (sharedPref?.edit()) {
+                this?.remove("$memoId") // Delete memo from list
+                this?.apply()
             }
+
+            parentFragmentManager.beginTransaction().apply {
+                replace(R.id.fragment_container, ListFragment())
+                commit()
+            }
+        }
+
+        shareButton?.setOnClickListener {
+
+        }
+
+        return view
     }
 }
