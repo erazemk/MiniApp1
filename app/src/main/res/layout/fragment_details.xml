@@ -8,7 +8,7 @@
     tools:context=".DetailsFragment">
 
     <TextView
-        android:id="@+id/detailsTitle"
+        android:id="@+id/detailsMemoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/detailsImage"
+        android:id="@+id/detailsMemoImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="32dp"
@@ -27,27 +27,27 @@
         android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/detailsMemoTitle" />
 
     <TextView
-        android:id="@+id/detailsTimestamp"
+        android:id="@+id/detailsMemoTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/note_timestamp_placeholder_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsImage" />
+        app:layout_constraintTop_toBottomOf="@+id/detailsMemoImage" />
 
     <TextView
-        android:id="@+id/detailsText"
+        android:id="@+id/detailsMemoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/note_contents_placeholder_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsTimestamp" />
+        app:layout_constraintTop_toBottomOf="@+id/detailsMemoTimestamp" />
 
     <Button
         android:id="@+id/detailsDeleteButton"
