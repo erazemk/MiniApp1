@@ -18,4 +18,9 @@
     <string name="save_note_button_text">Save note</string>
     <string name="note_title_hint_text">Add note title</string>
     <string name="note_contents_hint_text">Add note text</string>
+    <string name="new_note_image_content_description">Memo photo</string>
+    <string name="memo_title_empty_error">Memo title cannot be empty</string>
+    <string name="memo_text_empty_error">Memo text cannot be empty</string>
+    <string name="memo_image_empty_error">Memo image cannot be empty</string>
+    <string name="memo_camera_error">No application to take photo with</string>
 </resources>
