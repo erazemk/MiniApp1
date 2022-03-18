@@ -12,6 +12,7 @@
     <string name="note_contents_placeholder_text">Note contents go here</string>
     <string name="note_timestamp_placeholder_text">Note date goes here</string>
     <string name="note_photo_description_text">Note photo</string>
+    <string name="memo_email_send_error">No application to send email with</string>
 
     <!-- New note fragment -->
     <string name="take_photo_button_text">Take photo</string>

@@ -1,6 +1,9 @@
 package si.uni_lj.fri.pbd.miniapp1
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,12 +12,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.FileProvider
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
+import java.io.File
+import java.io.FileOutputStream
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private lateinit var memo: MemoModel
+    private var emailIntentRequestId = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,9 +78,33 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         }
 
         shareButton?.setOnClickListener {
+            // Save added image as file for sending over email
+            val bitmap = memoImage.drawable.toBitmap()
+            val imageFile = saveBitmap(bitmap)
+            val uriFile = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID + ".provider", imageFile)
+            val emailIntent = Intent(Intent.ACTION_SEND)
+            emailIntent.putExtra(Intent.EXTRA_STREAM, uriFile)
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, memo.title)
+            emailIntent.putExtra(Intent.EXTRA_TEXT, memo.timestamp + "\n\n" + memo.text)
+            emailIntent.type = "plain/text"
 
+            try {
+                startActivityForResult(emailIntent, emailIntentRequestId)
+            } catch (e: ActivityNotFoundException) {
+                Snackbar.make(view, R.string.memo_email_send_error, BaseTransientBottomBar.LENGTH_LONG).show()
+            }
         }
 
         return view
+    }
+
+    private fun saveBitmap(bitmap: Bitmap) : File {
+        val externalDir = context?.getExternalFilesDir(null)
+        val imageFile = File(externalDir, "temp.jpeg")
+        val out = FileOutputStream(imageFile)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+        out.flush()
+        out.close()
+        return imageFile
     }
 }
