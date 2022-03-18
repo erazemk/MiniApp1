@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             this?.putString("1", memo2.toString())
             this?.putString("2", memo3.toString())
             this?.putInt("count", 3)
-            this?.commit()
+            this?.apply()
         }
 
         // Specify initial fragment

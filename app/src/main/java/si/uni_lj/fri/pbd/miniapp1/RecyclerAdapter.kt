@@ -39,6 +39,7 @@ class RecyclerAdapter(var memos: MutableList<MemoModel>) : RecyclerView.Adapter<
                 activity?.supportFragmentManager?.beginTransaction()?.apply {
                     Log.d("RecyclerAdapter", "Opening memo ${memos[position].id}")
                     replace(R.id.fragment_container, DetailsFragment(memos[position].id))
+                    addToBackStack(null)
                     commit()
                 }
             }

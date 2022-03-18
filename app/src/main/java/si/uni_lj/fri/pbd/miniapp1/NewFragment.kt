@@ -82,7 +82,7 @@ class NewFragment : Fragment(R.layout.fragment_new) {
                 with (sharedPref.edit()) {
                     this?.putString("$memoId", jsonObject.toString())
                     this?.putInt("count", memoId + 1)
-                    this?.commit()
+                    this?.apply()
                 }
 
                 parentFragmentManager.beginTransaction().apply {

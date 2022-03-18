@@ -54,8 +54,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         addButton.setOnClickListener {
             Log.d("ListFragment", "Switching to new fragment")
             parentFragmentManager.beginTransaction().apply {
-                addToBackStack(ListFragment::class.toString())
                 replace(R.id.fragment_container, NewFragment())
+                addToBackStack(null)
                 commit()
             }
         }
