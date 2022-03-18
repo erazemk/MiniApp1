@@ -36,9 +36,6 @@ class NewFragment : Fragment(R.layout.fragment_new) {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        val isNotEmpty = (memoText?.text?.isNotBlank() == true)
-        Log.d("T", "Is memo text filled in: $isNotEmpty, '${memoText?.text}'")
-
         // Save memo data
         outState.putString("title", memoTitle?.text.toString())
         outState.putString("text", memoText?.text.toString())
@@ -50,6 +47,7 @@ class NewFragment : Fragment(R.layout.fragment_new) {
 
         // Restore memo data
         if (savedInstanceState != null) {
+            // Restore only non-empty data
             if (savedInstanceState.getString("title")?.isNotBlank() == true) title = savedInstanceState.getString("title")
             if (savedInstanceState.getString("text")?.isNotBlank() == true) text = savedInstanceState.getString("text")
             if (savedInstanceState.getParcelable("image") as Bitmap? != null) {
@@ -83,6 +81,7 @@ class NewFragment : Fragment(R.layout.fragment_new) {
         takePhotoButton.setOnClickListener {
             Log.d("NewFragment", "Taking new photo")
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
             try {
                 startActivityForResult(takePictureIntent, imageCaptureIntentRequestId)
             } catch (e: ActivityNotFoundException) {
@@ -127,7 +126,7 @@ class NewFragment : Fragment(R.layout.fragment_new) {
                     this?.apply()
                 }
 
-                // Return to list view
+                // Wipe backstack and return to list view
                 parentFragmentManager.beginTransaction().apply {
                     parentFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                     replace(R.id.fragment_container, ListFragment())

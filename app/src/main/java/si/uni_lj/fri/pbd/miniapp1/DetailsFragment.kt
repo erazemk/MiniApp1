@@ -31,20 +31,18 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-
-        // Get memo ID from RecyclerAdapter through a bundle
+        // Get memo ID, either from sent bundle or restored on configuration change
         if (savedInstanceState != null) {
             memoId = savedInstanceState.getInt("memoId")
         } else {
             memoId = this.arguments?.getInt("memoId") as Int
         }
 
-        with (sharedPref?.edit()) {
-            val memoJson = sharedPref?.getString("$memoId", "")
-            memo = jsonToMemo(JSONObject(memoJson as String))
-            Log.d("DetailsFragment", "Opened memo titled '${memo.title}'")
-        }
+        // Get memo info from SharedPreferences
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        val memoJson = sharedPref?.getString("$memoId", "")
+        memo = jsonToMemo(JSONObject(memoJson as String))
+        Log.d("DetailsFragment", "Opened memo titled '${memo.title}'")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -82,6 +80,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 this?.apply()
             }
 
+            // Wipe backstack and then return to list
             parentFragmentManager.beginTransaction().apply {
                 parentFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 replace(R.id.fragment_container, ListFragment())
@@ -91,8 +90,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         shareButton?.setOnClickListener {
             // Save added image as file for sending over email
-            val bitmap = memoImage.drawable.toBitmap()
-            val imageFile = saveBitmap(bitmap)
+            val imageFile = saveBitmap(memoImage.drawable.toBitmap())
             val uriFile = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID + ".provider", imageFile)
             val emailIntent = Intent(Intent.ACTION_SEND)
             emailIntent.putExtra(Intent.EXTRA_STREAM, uriFile)

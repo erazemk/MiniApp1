@@ -18,10 +18,13 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Get memo count from SharedPreferences
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
         val memoCount = sharedPref?.getInt("count", 0)
         Log.d("ListFragment", "Got $memoCount memos")
 
+        // Restore saved memos
         if (memoCount != null && memoCount > 0) {
             with(sharedPref.edit()) {
                 for (memoId in 0 until memoCount) {
@@ -54,7 +57,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
             parentFragmentManager.beginTransaction().apply {
                 replace(R.id.fragment_container, NewFragment())
-                addToBackStack(null)
+                addToBackStack(null) // Allow returning to list on back button press
                 commit()
             }
         }

@@ -8,7 +8,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Specify initial fragment
+        // Specify initial fragment when first starting app
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.fragment_container, ListFragment())
