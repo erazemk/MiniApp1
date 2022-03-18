@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import java.util.Date
@@ -128,6 +129,7 @@ class NewFragment : Fragment(R.layout.fragment_new) {
 
                 // Return to list view
                 parentFragmentManager.beginTransaction().apply {
+                    parentFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                     replace(R.id.fragment_container, ListFragment())
                     commit()
                 }

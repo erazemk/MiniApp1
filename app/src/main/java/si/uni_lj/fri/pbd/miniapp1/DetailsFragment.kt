@@ -15,6 +15,7 @@ import android.widget.TextView
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
@@ -24,6 +25,7 @@ import java.io.FileOutputStream
 class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private lateinit var memo: MemoModel
+    private var memoId = -1
     private var emailIntentRequestId = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,13 +34,22 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
 
         // Get memo ID from RecyclerAdapter through a bundle
-        val memoId = this.arguments?.getInt("memoId")
+        if (savedInstanceState != null) {
+            memoId = savedInstanceState.getInt("memoId")
+        } else {
+            memoId = this.arguments?.getInt("memoId") as Int
+        }
 
         with (sharedPref?.edit()) {
             val memoJson = sharedPref?.getString("$memoId", "")
             memo = jsonToMemo(JSONObject(memoJson as String))
             Log.d("DetailsFragment", "Opened memo titled '${memo.title}'")
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("memoId", memoId)
     }
 
     override fun onCreateView(
@@ -72,6 +83,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             }
 
             parentFragmentManager.beginTransaction().apply {
+                parentFragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
                 replace(R.id.fragment_container, ListFragment())
                 commit()
             }
