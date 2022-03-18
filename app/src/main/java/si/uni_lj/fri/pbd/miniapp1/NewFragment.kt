@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -21,8 +22,41 @@ import java.text.SimpleDateFormat
 
 class NewFragment : Fragment(R.layout.fragment_new) {
 
+    private var memoTitle: EditText? = null
     private var memoImage: ImageView? = null
-    private val IMAGE_CAPTURE_REQUEST_CODE = 1
+    private var memoText: EditText? = null
+    private var title: String? = null
+    private var text: String? = null
+    private var image: Bitmap? = null
+    private var imageTag: Any? = null
+
+    private val imageCaptureIntentRequestId = 1
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        val isNotEmpty = (memoText?.text?.isNotBlank() == true)
+        Log.d("T", "Is memo text filled in: $isNotEmpty, '${memoText?.text}'")
+
+        // Save memo data
+        outState.putString("title", memoTitle?.text.toString())
+        outState.putString("text", memoText?.text.toString())
+        if (memoImage?.tag != null) outState.putParcelable("image", memoImage?.drawable?.toBitmap())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Restore memo data
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getString("title")?.isNotBlank() == true) title = savedInstanceState.getString("title")
+            if (savedInstanceState.getString("text")?.isNotBlank() == true) text = savedInstanceState.getString("text")
+            if (savedInstanceState.getParcelable("image") as Bitmap? != null) {
+                image = savedInstanceState.getParcelable("image")
+                imageTag = "nonempty"
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,17 +66,24 @@ class NewFragment : Fragment(R.layout.fragment_new) {
         Log.d("NewFragment", "Created new fragment")
 
         val view = inflater.inflate(R.layout.fragment_new, container, false)
-        memoImage = view.findViewById(R.id.newMemoImage)
-        val memoTitle = view.findViewById<TextView>(R.id.newMemoTitle)
-        val memoText = view.findViewById<TextView>(R.id.newMemoText)
         val takePhotoButton = view.findViewById<Button>(R.id.newTakeImageButton)
         val saveMemoButton = view.findViewById<Button>(R.id.newSaveMemoButton)
+
+        memoImage = view.findViewById(R.id.newMemoImage)
+        memoTitle = view.findViewById(R.id.newMemoTitle)
+        memoText = view.findViewById(R.id.newMemoText)
+
+        // Set EditText's text to saved data
+        if (title?.isNotBlank() == true) memoTitle?.setText(title)
+        if (text?.isNotBlank() == true) memoText?.setText(text)
+        if (image != null) memoImage?.setImageBitmap(image)
+        if (imageTag != null) memoImage?.tag = imageTag
 
         takePhotoButton.setOnClickListener {
             Log.d("NewFragment", "Taking new photo")
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
-                startActivityForResult(takePictureIntent, IMAGE_CAPTURE_REQUEST_CODE)
+                startActivityForResult(takePictureIntent, imageCaptureIntentRequestId)
             } catch (e: ActivityNotFoundException) {
                 Snackbar.make(view, R.string.memo_camera_error, BaseTransientBottomBar.LENGTH_LONG).show()
             }
@@ -56,9 +97,9 @@ class NewFragment : Fragment(R.layout.fragment_new) {
             }
 
             // Check if any field is empty
-            if (memoTitle.text.isEmpty() || memoText.text.isEmpty() || memoImage?.tag == null) {
-                if (memoTitle.text.isEmpty()) memoTitle.error = getString(R.string.memo_title_empty_error)
-                if (memoText.text.isEmpty()) memoText.error = getString(R.string.memo_text_empty_error)
+            if (memoTitle?.text?.isBlank() == true || memoText?.text?.isBlank() == true || memoImage?.tag == null) {
+                if (memoTitle?.text?.isBlank() == true) memoTitle?.error = getString(R.string.memo_title_empty_error)
+                if (memoText?.text?.isBlank() == true) memoText?.error = getString(R.string.memo_text_empty_error)
                 if (memoImage?.tag == null) Snackbar.make(view, R.string.memo_image_empty_error, BaseTransientBottomBar.LENGTH_LONG).show()
             } else {
                 Log.d("NewFragment", "Else")
@@ -69,9 +110,9 @@ class NewFragment : Fragment(R.layout.fragment_new) {
 
                 val memo = MemoModel(
                     id = memoId,
-                    title = memoTitle.text.toString(),
+                    title = memoTitle?.text.toString(),
                     timestamp = SimpleDateFormat("dd. MM. yy, hh:mm:ss").format(Date()),
-                    text = memoText.text.toString(),
+                    text = memoText?.text.toString(),
                     image = bitmap.bitmap
                 )
 
@@ -85,6 +126,7 @@ class NewFragment : Fragment(R.layout.fragment_new) {
                     this?.apply()
                 }
 
+                // Return to list view
                 parentFragmentManager.beginTransaction().apply {
                     replace(R.id.fragment_container, ListFragment())
                     commit()
@@ -96,7 +138,7 @@ class NewFragment : Fragment(R.layout.fragment_new) {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == IMAGE_CAPTURE_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+        if (requestCode == imageCaptureIntentRequestId && resultCode == RESULT_OK && data != null) {
             val imageBitmap = data.extras?.get("data") as Bitmap
             memoImage?.setImageBitmap(imageBitmap)
             memoImage?.tag = "Nonempty" // Random text to make tag not null

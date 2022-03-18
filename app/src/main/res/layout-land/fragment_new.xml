@@ -3,35 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".NewFragment">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/newGuidelineTop"
+        android:id="@+id/newGuidelineLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/newGuidelineBottom"
+        android:id="@+id/newGuidelineRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.70" />
 
     <ImageView
         android:id="@+id/newMemoImage"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/new_note_image_content_description"
         android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintBottom_toTopOf="@+id/newGuidelineTop"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/newGuidelineLeft"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,15 +38,15 @@
         android:id="@+id/newMemoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="64dp"
         android:hint="@string/note_title_hint_text"
         android:importantForAutofill="no"
         android:inputType="text"
-        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/newMemoText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGuidelineTop"
+        app:layout_constraintEnd_toStartOf="@+id/newGuidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/newGuidelineLeft"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
@@ -58,9 +57,9 @@
         android:hint="@string/note_contents_hint_text"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/newGuidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/newGuidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/newMemoTitle" />
 
     <Button
@@ -71,8 +70,8 @@
         app:layout_constraintBottom_toTopOf="@+id/newSaveMemoButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGuidelineBottom"
+        app:layout_constraintStart_toStartOf="@+id/newGuidelineRight"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
@@ -83,7 +82,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/newGuidelineRight"
         app:layout_constraintTop_toBottomOf="@+id/newTakeImageButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
