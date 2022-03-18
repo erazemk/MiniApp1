@@ -85,7 +85,7 @@ class NewFragment : Fragment(R.layout.fragment_new) {
             try {
                 startActivityForResult(takePictureIntent, imageCaptureIntentRequestId)
             } catch (e: ActivityNotFoundException) {
-                Snackbar.make(view, R.string.memo_camera_error, BaseTransientBottomBar.LENGTH_LONG).show()
+                Snackbar.make(view, R.string.new_memo_camera_error_text, BaseTransientBottomBar.LENGTH_LONG).show()
             }
         }
 
@@ -98,9 +98,9 @@ class NewFragment : Fragment(R.layout.fragment_new) {
 
             // Check if any field is empty
             if (memoTitle?.text?.isBlank() == true || memoText?.text?.isBlank() == true || memoImage?.tag == null) {
-                if (memoTitle?.text?.isBlank() == true) memoTitle?.error = getString(R.string.memo_title_empty_error)
-                if (memoText?.text?.isBlank() == true) memoText?.error = getString(R.string.memo_text_empty_error)
-                if (memoImage?.tag == null) Snackbar.make(view, R.string.memo_image_empty_error, BaseTransientBottomBar.LENGTH_LONG).show()
+                if (memoTitle?.text?.isBlank() == true) memoTitle?.error = getString(R.string.new_memo_title_empty_error_text)
+                if (memoText?.text?.isBlank() == true) memoText?.error = getString(R.string.new_memo_text_empty_error_text)
+                if (memoImage?.tag == null) Snackbar.make(view, R.string.new_memo_image_empty_error_text, BaseTransientBottomBar.LENGTH_LONG).show()
             } else {
                 Log.d("NewFragment", "Else")
 

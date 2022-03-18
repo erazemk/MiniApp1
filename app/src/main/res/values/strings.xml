@@ -1,27 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" tools:ignore="Typos">MiniApp 1</string>
     
-    <!-- List fragment -->
-    <string name="list_note_image_description">Note image</string>
-    <string name="list_button_add_description">Add note</string>
+    <!-- ListFragment -->
+    <string name="list_item_image_description">Note photo</string>
+    <string name="list_add_memo_button_description">Add note button</string>
 
-    <!-- Details fragment -->
-    <string name="note_delete_button_text">Delete</string>
-    <string name="note_share_button_text">Share</string>
-    <string name="note_title_placeholder_text">Note title goes here</string>
-    <string name="note_contents_placeholder_text">Note contents go here</string>
-    <string name="note_timestamp_placeholder_text">Note date goes here</string>
-    <string name="note_photo_description_text">Note photo</string>
-    <string name="memo_email_send_error">No application to send email with</string>
+    <!-- DetailsFragment -->
+    <string name="details_memo_delete_button_text">Delete</string>
+    <string name="details_memo_share_button_text">Share</string>
+    <string name="details_memo_title_placeholder_text">Note title goes here</string>
+    <string name="details_memo_timestamp_placeholder_text">Note timestamp goes here</string>
+    <string name="details_memo_text_placeholder_text">Note text goes here</string>
+    <string name="details_memo_image_description">Note image</string>
+    <string name="details_memo_email_send_error_text">No application to send email with</string>
 
-    <!-- New note fragment -->
-    <string name="take_photo_button_text">Take photo</string>
-    <string name="save_note_button_text">Save note</string>
-    <string name="note_title_hint_text">Add note title</string>
-    <string name="note_contents_hint_text">Add note text</string>
-    <string name="new_note_image_content_description">Memo photo</string>
-    <string name="memo_title_empty_error">Memo title cannot be empty</string>
-    <string name="memo_text_empty_error">Memo text cannot be empty</string>
-    <string name="memo_image_empty_error">Memo image cannot be empty</string>
-    <string name="memo_camera_error">No application to take photo with</string>
+    <!-- NewFragment -->
+    <string name="new_take_image_button_text">Take photo</string>
+    <string name="new_memo_save_button_text">Save note</string>
+    <string name="new_memo_title_hint_text">Add note title</string>
+    <string name="new_memo_text_hint_text">Add note text</string>
+    <string name="new_memo_image_description">Note photo</string>
+    <string name="new_memo_title_empty_error_text">Note title cannot be empty</string>
+    <string name="new_memo_text_empty_error_text">Note text cannot be empty</string>
+    <string name="new_memo_image_empty_error_text">Note image cannot be empty</string>
+    <string name="new_memo_camera_error_text">No application to take photo with</string>
 </resources>

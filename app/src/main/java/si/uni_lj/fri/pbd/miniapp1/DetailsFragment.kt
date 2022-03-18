@@ -102,7 +102,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             try {
                 startActivityForResult(emailIntent, emailIntentRequestId)
             } catch (e: ActivityNotFoundException) {
-                Snackbar.make(view, R.string.memo_email_send_error, BaseTransientBottomBar.LENGTH_LONG).show()
+                Snackbar.make(view, R.string.details_memo_email_send_error_text, BaseTransientBottomBar.LENGTH_LONG).show()
             }
         }
 
