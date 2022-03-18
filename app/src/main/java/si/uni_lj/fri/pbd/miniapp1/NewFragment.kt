@@ -112,7 +112,7 @@ class NewFragment : Fragment(R.layout.fragment_new) {
                 val memo = MemoModel(
                     id = memoId,
                     title = memoTitle?.text.toString(),
-                    timestamp = SimpleDateFormat("dd. MM. yy, hh:mm:ss").format(Date()),
+                    timestamp = SimpleDateFormat("dd. MM. yy, HH:mm:ss").format(Date()),
                     text = memoText?.text.toString(),
                     image = bitmap.bitmap
                 )
