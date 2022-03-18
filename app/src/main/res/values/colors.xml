@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Light theme color scheme -->
-    <color name="primary">#3F51B5</color>
-    <color name="primary_light">#757DE8</color>
+    <color name="primary">#3f51b5</color>
+    <color name="primary_light">#757de8</color>
     <color name="primary_dark">#002984</color>
-    <color name="primary_text">#FFFFFF</color>
-    <color name="secondary">#B53F51</color>
-    <color name="secondary_light">#EB6F7D</color>
+    <color name="primary_text">#ffffff</color>
+    <color name="primary_light_text">#000000</color>
+    <color name="secondary">#b53f51</color>
+    <color name="secondary_light">#eb6f7d</color>
     <color name="secondary_dark">#800229</color>
-    <color name="secondary_text">#FFFFFF</color>
+    <color name="secondary_text">#ffffff</color>
+    <color name="secondary_light_text">#000000</color>
 
     <!-- Dark theme color scheme -->
-    <color name="primary_night">#3F51B5</color>
-    <color name="primary_night_light">#757DE8</color>
+    <color name="primary_night">#3f51b5</color>
+    <color name="primary_night_light">#757de8</color>
     <color name="primary_night_dark">#002984</color>
-    <color name="primary_night_text">#FFFFFF</color>
-    <color name="secondary_night">#B53F51</color>
-    <color name="secondary_night_light">#EB6F7D</color>
+    <color name="primary_night_text">#ffffff</color>
+    <color name="primary_night_light_text">#000000</color>
+    <color name="secondary_night">#b53f51</color>
+    <color name="secondary_night_light">#eb6f7d</color>
     <color name="secondary_night_dark">#800229</color>
-    <color name="secondary_night_text">#FFFFFF</color>
+    <color name="secondary_night_text">#ffffff</color>
+    <color name="secondary_night_light_text">#000000</color>
 </resources>

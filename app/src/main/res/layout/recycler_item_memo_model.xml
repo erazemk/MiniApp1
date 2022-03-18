@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/memoListItem"
     android:layout_margin="8dp"
-    app:cardBackgroundColor="@color/primary_light"
+    app:cardBackgroundColor="@color/primary"
     app:cardCornerRadius="16dp"
     app:cardElevation="8dp"
     app:contentPadding="4dp"
