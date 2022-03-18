@@ -12,7 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import org.json.JSONObject
 
-class DetailsFragment(var memoId: Int) : Fragment(R.layout.fragment_details) {
+class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private lateinit var memo: MemoModel
 
@@ -20,6 +20,10 @@ class DetailsFragment(var memoId: Int) : Fragment(R.layout.fragment_details) {
         super.onCreate(savedInstanceState)
 
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+
+        // Get memo ID from RecyclerAdapter through a bundle
+        val memoId = this.arguments?.getInt("memoId")
+
         with (sharedPref?.edit()) {
             val memoJson = sharedPref?.getString("$memoId", "")
             memo = jsonToMemo(JSONObject(memoJson as String))
@@ -53,7 +57,7 @@ class DetailsFragment(var memoId: Int) : Fragment(R.layout.fragment_details) {
         deleteButton?.setOnClickListener {
             val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
             with (sharedPref?.edit()) {
-                this?.remove("$memoId") // Delete memo from list
+                this?.remove("${memo.id}") // Delete memo from list
                 this?.apply()
             }
 

@@ -1,5 +1,6 @@
 package si.uni_lj.fri.pbd.miniapp1
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -35,10 +36,19 @@ class RecyclerAdapter(var memos: MutableList<MemoModel>) : RecyclerView.Adapter<
 
             // Switch to details fragment when clicking on item
             itemView.setOnClickListener {
+
+                // Send memo ID with Bundle when switching fragments
+                val bundle = Bundle()
+                val detailsFragment = DetailsFragment()
+                bundle.putInt("memoId", memos[position].id)
+                detailsFragment.arguments = bundle
+
+                Log.d("RecyclerAdapter", "Sent arguments ${detailsFragment.arguments}")
+
                 val activity = it.context as? AppCompatActivity
                 activity?.supportFragmentManager?.beginTransaction()?.apply {
                     Log.d("RecyclerAdapter", "Opening memo ${memos[position].id}")
-                    replace(R.id.fragment_container, DetailsFragment(memos[position].id))
+                    replace(R.id.fragment_container, detailsFragment)
                     addToBackStack(null)
                     commit()
                 }
