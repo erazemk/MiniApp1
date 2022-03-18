@@ -98,6 +98,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
             emailIntent.putExtra(Intent.EXTRA_STREAM, uriFile)
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, memo.title)
             emailIntent.putExtra(Intent.EXTRA_TEXT, memo.timestamp + "\n\n" + memo.text)
+            emailIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
             emailIntent.type = "plain/text"
 
             try {
