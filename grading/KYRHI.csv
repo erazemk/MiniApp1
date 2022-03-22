@@ -32,7 +32,7 @@ No.;QUESTION;ANSWER;WEIGHT;COMMENT (if grading 0 points)
 26;Does clicking the save button perform as expected? (Saving the memo, returning to ListFragment and showing the list of memos including the newly added one);0;1;App isn’t implemented
 ;GENERAL;;;
 26;Is the code sufficiently well commented in English?;0;1;App isn’t implemented
-27;"Is the following statement true: ""The app did not crash at any time during testing""";0;1;App isn’t implemented
+27;"Is the following statement true: ""The app did not crash at any time during testing""";1;1;Technically true
 28;Does the app use SharedPreferences?;0;1;App isn’t implemented
 29;Is there error checking?;0;1;App isn’t implemented
 30;Are errors reported in a friendly manner?;0;1;App isn’t implemented
