@@ -1,0 +1,40 @@
+No.;QUESTION;ANSWER;WEIGHT;COMMENT (if grading 0 points)
+;COMPILATION (1 and 2 can’t be both true at the same time);;;
+1;The code compiled from the first try;1;1;
+2;The code did no compile initially, but was fixed with some changes in the Kotlin code;0;-1;
+;APP STRUCTURE;;;
+3;Does the app have one activity and three fragments?;1;1;
+4;Is the main activity of type AppCompatActivity and using a layout file named activity_main.xml?;1;1;
+5;Is the first fragment called ListFragment and does it use a layout file called fragment_list.xml?;1;1;
+6;Is the second fragment called DetailsFragment and does it use a layout file called fragment_details.xml?;1;1;
+7;Is the third fragment called NewFragment and does it use a layout file called fragment_new.xml?;1;1;
+8;Does the MainActivity upon starting the app show the ListFragment?;0;1;App isn’t implemented
+;ListFragment - ! Add some new memos before answering questions 9-11 !;;;
+9;Does the ListFragment show a RecyclerView with a list of memos?;0;1;App isn’t implemented
+10;Does each item in the RecyclerView display the photo, title and timestamp for that particular memo?;0;1;App isn’t implemented
+11;Does clicking on an item in the RecyclerView show the DetailsFragment?;0;1;App isn’t implemented
+12;"Does the ListFragment layout show a Floating Action Button with a ""+"" sign on it?";0;1;App isn’t implemented
+13;Does clicking the Floating Action Button show the NewFragment?;0;1;App isn’t implemented
+;DetailsFragment;;;
+14;Does the DetailsFragment show the photo, title, description and timestamp of the memo?;0;1;App isn’t implemented
+15;Does the DetailsFragment show two buttons, one for deleting the memo and one for sharing it via e-mail?;0;1;App isn’t implemented
+16;Does clicking the Delete button perform the expected action? (Deleting the memo, returning to ListFragment and showing the list of memos without the deleted one);0;1;App isn’t implemented
+17;Does clicking the Share button launch the proper intent and creates a new e-mail message?;0;1;App isn’t implemented
+18;Is the memo's title set as the subject of the email message?;0;1;App isn’t implemented
+19;Are the memo description and timestamp set as the body text of the email message?;0;1;App isn’t implemented
+20;Is the memo's photo added as an attachment to the email message?;0;1;App isn’t implemented
+21;Does sending the e-mail message work? Check this by sending the e-mail to yourself and checking if you receive it properly.;0;1;App isn’t implemented
+;NewFragment;;;
+22;Does the NewFragment show an ImageView, two EditText elements, and two buttons?;0;1;App isn’t implemented
+23;Does the ImageView display by default a placeholder image which is saved as the memo's image if not picture is taken with the camera?;0;1;App isn’t implemented
+24;Does clicking the take picture button open the device camera?;0;1;App isn’t implemented
+25;Is the picture taken with the camera immediately visible in the ImageView, replacing the placeholder image?;0;1;App isn’t implemented
+26;Does clicking the save button perform as expected? (Saving the memo, returning to ListFragment and showing the list of memos including the newly added one);0;1;App isn’t implemented
+;GENERAL;;;
+26;Is the code sufficiently well commented in English?;0;1;App isn’t implemented
+27;"Is the following statement true: ""The app did not crash at any time during testing""";0;1;App isn’t implemented
+28;Does the app use SharedPreferences?;0;1;App isn’t implemented
+29;Is there error checking?;0;1;App isn’t implemented
+30;Are errors reported in a friendly manner?;0;1;App isn’t implemented
+General comments;App had the activity and fragments generated, but not implemented, so I could not properly test it.;;;
+;;0;;
